@@ -1,0 +1,20 @@
+.template3 .company-title {
+  color: #166534;
+}
+.template3 .invoice-title,
+.template3 .billing-title,
+.template3 .table-header,
+.template3 .total-highlight {
+  color: #15803d;
+}
+.template3 .table-header {
+  background-color: #15803d !important;
+  color: white !important;
+}
+.template3 .billing-box,
+.template3 .totals-box {
+  background-color: #f0fdf4;
+}
+.template3 .green-border {
+  border-color: #15803d !important;
+}

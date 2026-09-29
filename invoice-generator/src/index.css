@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap');
+
+*{
+    font-family: "Urbanist", sans-serif;
+}
+
+/* Css for all pages common */
+.cursor-pointer{
+    cursor: pointer;
+}
+
+/* spinner */
+@keyframes spin {
+    100%{
+        transform: rotate(360deg);
+    }
+    
+}
+
+.spin-animation{
+    animation: spin 1s linear infinite;
+}
+
+.mainpage input:focus,
+.invoiceform input:focus,
+.invoiceform textarea:focus,
+.invoiceform select:focus{
+    box-shadow: none !important;
+}
+
+
+/* PreviewPage container */
+.previewpage {
+  background-color: #f0f2f5; /* soft gray backdrop */
+  min-height: 100vh;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Invoice preview display area */
+.invoice-preview {
+  width: 794px;               /* A4 width */
+  min-height: 1123px;         /* A4 height */
+  background-color: #fff;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  padding: 32px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+

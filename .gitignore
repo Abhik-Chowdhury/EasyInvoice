@@ -1,0 +1,33 @@
+# ==========================================
+# 1. Frontend Specific (invoice-generator)
+# ==========================================
+invoice-generator/node_modules/
+invoice-generator/dist/
+invoice-generator/build/
+invoice-generator/.next/
+invoice-generator/out/
+invoice-generator/.env
+invoice-generator/.env.*
+
+# ==========================================
+# 2. Backend Specific (easyInvoiceapi)
+# ==========================================
+easyInvoiceapi/target/
+easyInvoiceapi/build/
+easyInvoiceapi/.gradle/
+# Exclude sensitive MongoDB / app credentials
+easyInvoiceapi/src/main/resources/application.properties
+easyInvoiceapi/src/main/resources/application.yml
+easyInvoiceapi/.env
+
+# ==========================================
+# 3. General IDE & System Trash (Both)
+# ==========================================
+.idea/
+.vscode/
+*.iml
+*.suo
+.DS_Store
+Thumbs.db
+npm-debug.log*
+yarn-debug.log*

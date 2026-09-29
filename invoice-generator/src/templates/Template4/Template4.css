@@ -1,0 +1,20 @@
+.template4 .company-title {
+  color: #c2410c;
+}
+.template4 .invoice-title,
+.template4 .billing-title,
+.template4 .table-header,
+.template4 .total-highlight {
+  color: #d97706;
+}
+.template4 .table-header {
+  background-color: #f97316 !important;
+  color: #ffffff !important;
+}
+.template4 .billing-box,
+.template4 .totals-box {
+  background-color: #fef3c7;
+}
+.template4 .coral-border {
+  border-color: #f97316 !important;
+}

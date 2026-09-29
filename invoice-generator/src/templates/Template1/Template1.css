@@ -1,0 +1,184 @@
+/* ================================
+   TEMPLATE 1
+================================ */
+
+.template1 {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto !important;
+    padding: 20px !important;
+    background: #ffffff;
+    box-sizing: border-box;
+}
+
+/* Main invoice width */
+.w-800 {
+    width: 100%;
+    max-width: 800px;
+}
+
+
+/* ================================
+   COMPANY
+================================ */
+
+.company-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.invoice-title {
+    color: #ea580c;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* ================================
+   BILLING
+================================ */
+
+.billing-title {
+    color: #ea580c;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.billing-box {
+    background-color: #fff7ed;
+}
+
+
+/* ================================
+   DIVIDER
+================================ */
+
+.orange-border {
+    border-color: #ea580c !important;
+}
+
+
+/* ================================
+   TABLE
+================================ */
+
+.table-header {
+    background-color: #ea580c !important;
+    color: white !important;
+}
+
+.template1 table {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.template1 th,
+.template1 td {
+    vertical-align: middle;
+}
+
+
+/* ================================
+   TOTALS
+================================ */
+
+.totals-box {
+    font-size: 16px;
+    font-weight: bold;
+    background-color: #fff7ed;
+}
+
+.total-highlight {
+    color: #ea580c;
+}
+
+
+/* ================================
+   COMPANY TITLE COLOR
+================================ */
+
+.template1 .company-title {
+    color: #ea580c;
+}
+
+
+/* ================================
+   LOGO
+================================ */
+
+.template1 img {
+    max-width: 100px;
+    max-height: 100px;
+    object-fit: contain;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+/*
+   Prevent the header from becoming
+   excessively tall.
+*/
+
+.template1 > .row:first-child {
+    min-height: auto;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 768px) {
+
+    .template1 {
+        width: 100%;
+        max-width: 100%;
+        margin: 10px auto !important;
+        padding: 15px !important;
+    }
+
+    .company-title {
+        font-size: 17px;
+    }
+
+    .invoice-title {
+        font-size: 20px;
+    }
+
+    .billing-title {
+        font-size: 15px;
+    }
+
+    .template1 table {
+        font-size: 14px;
+    }
+}
+
+
+/* ================================
+   SMALL MOBILE
+================================ */
+
+@media (max-width: 576px) {
+
+    .template1 {
+        padding: 12px !important;
+    }
+
+    .template1 table {
+        font-size: 12px;
+    }
+
+    .template1 th,
+    .template1 td {
+        padding: 6px !important;
+    }
+
+    .totals-box {
+        font-size: 14px;
+    }
+}

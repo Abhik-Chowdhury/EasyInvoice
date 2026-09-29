@@ -1,0 +1,40 @@
+.template-purple .company-title {
+  color: #7c3aed; /* Purple-600 */
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.template-purple .invoice-title {
+  color: #7c3aed;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.template-purple .billing-title {
+  color: #7c3aed;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.template-purple .purple-border {
+  border-color: #7c3aed !important;
+}
+
+.template-purple .billing-box {
+  background-color: #f5f3ff; /* Soft purple background */
+}
+
+.template-purple .table-header {
+  background-color: #7c3aed !important;
+  color: white !important;
+}
+
+.template-purple .totals-box {
+  font-size: 16px;
+  font-weight: bold;
+  background-color: #f5f3ff;
+}
+
+.template-purple .total-highlight {
+  color: #7c3aed;
+}

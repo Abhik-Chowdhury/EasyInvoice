@@ -1,3 +1,4 @@
+/*
 package com.smarthub.easyInvoiceapi.security;
 
 
@@ -33,7 +34,7 @@ public class ClerkJwtAuthFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        // TODO: implement auth filter
+         TODO: implement auth filter
         if(request.getRequestURI().contains("/api/webhooks")){
             filterChain.doFilter(request, response);
             return;
@@ -77,5 +78,99 @@ public class ClerkJwtAuthFilter extends OncePerRequestFilter {
         }
 
 
+    }
+}
+*/
+package com.smarthub.easyInvoiceapi.security;
+
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Jwts;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
+import tools.jackson.databind.JsonNode;
+import tools.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.security.PublicKey;
+import java.util.Base64;
+import java.util.Collections;
+
+@Component
+@RequiredArgsConstructor
+public class ClerkJwtAuthFilter extends OncePerRequestFilter {
+
+    @Value("${clerk.issuer}")
+    private String clerkIssuer;
+
+    private final ClerkJwksProvider jwksProvider;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+
+        // FIXED: Allows browser OPTIONS (CORS pre-flight) requests to pass without checking headers
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        if (request.getRequestURI().contains("/api/webhooks")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        String authHeader = request.getHeader("Authorization");
+
+        // FIXED: Added strict checking for the space after "Bearer " to avoid indexing mismatches
+        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Authorization header is missing/invalid");
+            return;
+        }
+
+        try {
+            String token = authHeader.substring(7);
+
+            String[] chunks = token.split("\\.");
+            String headerJson = new String(Base64.getUrlDecoder().decode(chunks[0]));
+
+            ObjectMapper mapper = new ObjectMapper();
+            JsonNode headerNode = mapper.readTree(headerJson);
+            String kid = headerNode.get("kid").asText();
+
+            PublicKey publicKey = jwksProvider.getPublicKey(kid);
+
+            // FIXED: Migrated deprecated methods to modern jjwt syntax
+            Claims claims = Jwts.parser()
+                    .verifyWith(publicKey)      // Replaces setSigningKey()
+                    .clockSkewSeconds(60)       // Replaces setAllowedClockSkewSeconds()
+                    .requireIssuer(clerkIssuer)
+                    .build()
+                    .parseSignedClaims(token)   // Replaces parseClaimsJws()
+                    .getPayload();              // Replaces getBody()
+
+            String clerkUserId = claims.getSubject();
+
+            UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
+                    clerkUserId,
+                    null,
+                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"))
+            );
+
+            SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+
+            filterChain.doFilter(request, response);
+
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_FORBIDDEN, "Invalid JWT token");
+        }
     }
 }

@@ -15,6 +15,7 @@ invoice-generator/.env.*
 easyInvoiceapi/target/
 easyInvoiceapi/build/
 easyInvoiceapi/.gradle/
+easyInvoiceapi/.env
 # Exclude sensitive MongoDB / app credentials
 easyInvoiceapi/src/main/resources/application.properties
 easyInvoiceapi/src/main/resources/application.yml

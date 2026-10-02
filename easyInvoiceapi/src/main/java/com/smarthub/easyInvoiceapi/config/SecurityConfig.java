@@ -105,7 +105,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // FIXED: Removed the trailing slash ("/") to match exact browser origin headers
-        config.setAllowedOrigins(List.of("https://easy-invoice-virid.vercel.app"));
+        config.setAllowedOrigins(List.of("http://localhost:5173/","https://easy-invoice-virid.vercel.app"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
         config.setAllowCredentials(true);
